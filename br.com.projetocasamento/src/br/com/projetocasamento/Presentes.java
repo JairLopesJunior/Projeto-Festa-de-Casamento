@@ -1,6 +1,6 @@
 package br.com.projetocasamento;
 
-public class EstoquePresentes {
+public class Presentes {
 
 	String tipo;
 	String localCompra;
@@ -17,4 +17,5 @@ public class EstoquePresentes {
 	public void setLocalCompra(String localCompra) {
 		this.localCompra = localCompra;
 	}
+	
 }
