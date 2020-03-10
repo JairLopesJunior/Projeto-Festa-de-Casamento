@@ -7,10 +7,10 @@ public class App {
 
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
-		Convidados conv = new Convidados();
 		ListaConvidados lista = new ListaConvidados();
 		ListaPresentes listaPresentes = new ListaPresentes();
-		Presentes presentes = new Presentes();
+		int cont = 0;
+		int cont2 = 0;
 		
 		do {
 			
@@ -24,7 +24,13 @@ public class App {
 			System.out.println("**********************************");
 			System.out.println("4.\t Ver Presentes ");
 			System.out.println("**********************************");
-			System.out.println("5.\t Ver Convidados ");
+			System.out.println("5.\t Gravar Convidados em TXT ");
+			System.out.println("**********************************");
+			System.out.println("6.\t Ler Convidados do TXT ");
+			System.out.println("**********************************");
+			System.out.println("7.\t Gravar Presenes no TXT ");
+			System.out.println("**********************************");
+			System.out.println("8.\t Ler Presenes do TXT ");
 			System.out.println("**********************************");
 			System.out.println("0.\t Encerrar sistema");	
 			opcao = scan.nextInt();
@@ -33,15 +39,41 @@ public class App {
 					
 					try {
 						Convidados convi = new Convidados();
+						Presentes presentes = new Presentes();
+						Padrinhos p = new Padrinhos();
 						System.out.println("Informe o seu nome? ");
 						String nome = scan.next();
 						convi.setNome(nome);
+						System.out.println("Você é padrinho?(S) ou (N)");
+						String padrinho = scan.next();
+						if(padrinho.equalsIgnoreCase("s")) {
+							System.out.println("É padrinho do noivo?(S) ou (N)");
+							String pad = scan.next();
+							if(pad.equalsIgnoreCase("s")) {
+								if(cont >= 4) {
+									System.out.println("Numero limite de Padrinhos esgotados");
+									System.exit(0);
+								}else {
+									p.setPadrinhoNoivo(pad);
+									cont++;
+									System.out.println(cont);
+								}
+							}else {
+								if(cont >= 4) {
+									System.out.println("Numero limite de Padrinhos esgotados");	
+									System.exit(0);
+								}else {
+									p.setPadrinhoNoiva(pad);
+									cont2++;
+								}
+							}
+						}
 						System.out.println("Informe o seu CPF? ");
 						String cpf = scan.next();
 						convi.setCpf(cpf);
-						System.out.println("Informe quantas pessoas da sua famlia vai participar? ");
+						System.out.println("Informe quantas pessoas da sua familia vai participar? ");
 						int numeroFamilia = scan.nextInt();
-						conv.setFamiliares(numeroFamilia);
+						convi.setFamiliares(numeroFamilia);
 						System.out.println("Informe o numero da sua mesa? ");
 						int mesa = scan.nextInt();
 						convi.setMesa(mesa);
@@ -108,15 +140,28 @@ public class App {
 						Convidados convidadosEncontrados = lista.encontrarConvidado(nome);
 						if(convidadosEncontrados != null){
 							System.out.println("Nome: " + convidadosEncontrados.getNome());
-							System.out.println("Tipo de Presente: " + presentes.getTipo());
-							System.out.println("Local de Compra: " + presentes.getLocalCompra());
+							System.out.println("Tipo de Presente: " + convidadosEncontrados.getPres().getTipo());
+							System.out.println("Local de Compra: " + convidadosEncontrados.getPres().getLocalCompra());
 						}
 					}catch(Exception e){
 						System.out.println(e.fillInStackTrace());
 					}	
 				} 
+				
 				if(opcao == 5) {
 					lista.gravarTxt();
+				}
+				
+				if(opcao == 6) {
+					lista.listarConvidados();
+				}
+				
+				if(opcao == 7) {
+					listaPresentes.gravarPresentes();
+				}
+				
+				if(opcao == 8) {
+					listaPresentes.lerPresentes();
 				}
 			
 		}	while(opcao != 0);

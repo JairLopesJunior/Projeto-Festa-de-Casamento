@@ -3,6 +3,7 @@ package br.com.projetocasamento;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +23,7 @@ public class ListaConvidados {
 	
 	public Convidados gravarTxt() {
 		// Cria arquivo
-		File f = new File("teste.txt");
+		File f = new File("listaConvidados.txt");
 		try {
 			
 			// Cria caso não existir
@@ -31,7 +32,6 @@ public class ListaConvidados {
 			}
 			
 			// Ler no Arquivo
-			
 			FileWriter escreverArquivo = new FileWriter(f.getAbsoluteFile());
 			BufferedWriter bw = new BufferedWriter(escreverArquivo);
 
@@ -55,6 +55,25 @@ public class ListaConvidados {
 			e.fillInStackTrace();
 		}
 		return null;
+	}
+	
+	public void listarConvidados() {
+		File arquivo = new File("listaConvidados.txt");
+		 try {
+			 if(!arquivo.exists()) {
+				 arquivo.createNewFile();
+			 }
+			  FileReader lerArquivo = new FileReader(arquivo);
+			  BufferedReader bf = new BufferedReader(lerArquivo);
+			  
+			  while(bf.ready()) {
+				  String linha = bf.readLine();
+				  System.out.println(linha);
+			  }  
+			  
+		 }catch(Exception e) {
+			 e.fillInStackTrace();
+		 }
 		
 	}
 
