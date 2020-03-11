@@ -16,26 +16,44 @@ public class App {
 			
 			System.out.println("\nCadastro de Casamento");	
 			System.out.println("==================================");	
-			System.out.println("1.\t Realizar Cadastro");	
+			System.out.println("1.\t Cadastro do Local");	
+			System.out.println("==================================");	
+			System.out.println("2.\t Realizar Cadastro");	
 			System.out.println("**********************************");
-			System.out.println("2.\t Editar Cadastro ");
+			System.out.println("3.\t Editar Cadastro ");
 			System.out.println("**********************************");
-			System.out.println("3.\t Listar Cadastro ");
+			System.out.println("4.\t Listar Cadastro ");
 			System.out.println("**********************************");
-			System.out.println("4.\t Ver Presentes ");
+			System.out.println("5.\t Ver Presentes ");
+			System.out.println("*********************************");
+			System.out.println("6.\t Gravar Convidados em TXT ");
 			System.out.println("**********************************");
-			System.out.println("5.\t Gravar Convidados em TXT ");
+			System.out.println("7.\t Ler Convidados do TXT ");
 			System.out.println("**********************************");
-			System.out.println("6.\t Ler Convidados do TXT ");
+			System.out.println("8.\t Gravar Presenes no TXT ");
 			System.out.println("**********************************");
-			System.out.println("7.\t Gravar Presenes no TXT ");
-			System.out.println("**********************************");
-			System.out.println("8.\t Ler Presenes do TXT ");
+			System.out.println("9.\t Ler Presenes do TXT ");
 			System.out.println("**********************************");
 			System.out.println("0.\t Encerrar sistema");	
 			opcao = scan.nextInt();
 			
 				if(opcao == 1) {
+					Casamento c = new Casamento();
+					System.out.println("Informe o local do casamento:");
+					String localC = scan.next();
+					c.setLocalC(localC);
+					System.out.println("Informe o local da festa:");
+					String localF = scan.next();
+					c.setLocalF(localF);
+					System.out.println("Informe a data do casamento:");
+					String dataC = scan.next();
+					c.setDataC(dataC);
+					System.out.println("Informe a hora do casamento:");
+					String horaC = scan.next();
+					c.setHoraC(horaC);
+				}
+				
+				if(opcao == 2) {
 					
 					try {
 						Convidados convi = new Convidados();
@@ -44,28 +62,21 @@ public class App {
 						System.out.println("Informe o seu nome? ");
 						String nome = scan.next();
 						convi.setNome(nome);
-						System.out.println("Você é padrinho?(S) ou (N)");
-						String padrinho = scan.next();
-						if(padrinho.equalsIgnoreCase("s")) {
-							System.out.println("É padrinho do noivo?(S) ou (N)");
-							String pad = scan.next();
-							if(pad.equalsIgnoreCase("s")) {
-								if(cont >= 4) {
-									System.out.println("Numero limite de Padrinhos esgotados");
-									System.exit(0);
-								}else {
-									p.setPadrinhoNoivo(pad);
-									cont++;
-									System.out.println(cont);
-								}
-							}else {
-								if(cont >= 4) {
-									System.out.println("Numero limite de Padrinhos esgotados");	
-									System.exit(0);
-								}else {
-									p.setPadrinhoNoiva(pad);
-									cont2++;
-								}
+						System.out.println("É padrinho do noivo?(S) ou (N)");
+						String pad = scan.next();
+						if(cont >= 1 || cont2 >= 1) {
+							System.out.println("Numero limite de Padrinhos esgotados");
+							System.exit(0);
+						}
+						if(pad.equalsIgnoreCase("s")) {
+							p.setPadrinhoNoivo(pad);
+							cont++;
+						}else {
+							System.out.println("É padrinho da noiva?(S) ou (N)");
+							String pad2 = scan.next();
+							if(pad2.equalsIgnoreCase("s")) {
+								p.setPadrinhoNoiva(pad2);
+								cont2++;
 							}
 						}
 						System.out.println("Informe o seu CPF? ");
@@ -95,7 +106,7 @@ public class App {
 					}
 				}
 				
-				if(opcao == 2) {
+				if(opcao == 3) {
 						System.out.println("Informe o seu CPF:");
 						String cpfEncontrar = scan.next();
 						Convidados convidadosEncontrados = lista.encontrar(cpfEncontrar);
@@ -116,7 +127,7 @@ public class App {
 						}
 				}
 				
-				if(opcao == 3) {
+				if(opcao == 4) {
 					try {
 						System.out.println("Informe o seu CPF:");
 						String cpfEncontrar = scan.next();
@@ -133,7 +144,7 @@ public class App {
 					}
 				}
 				
-				if(opcao == 4) {
+				if(opcao == 5) {
 					try {
 						System.out.println("Informe o nome do convidado");
 						String nome = scan.next();
@@ -148,19 +159,19 @@ public class App {
 					}	
 				} 
 				
-				if(opcao == 5) {
+				if(opcao == 6) {
 					lista.gravarTxt();
 				}
 				
-				if(opcao == 6) {
+				if(opcao == 7) {
 					lista.listarConvidados();
 				}
 				
-				if(opcao == 7) {
+				if(opcao == 8) {
 					listaPresentes.gravarPresentes();
 				}
 				
-				if(opcao == 8) {
+				if(opcao == 9) {
 					listaPresentes.lerPresentes();
 				}
 			
